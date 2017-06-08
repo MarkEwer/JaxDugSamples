@@ -13,11 +13,12 @@ namespace UntyptedActorDemo
         protected override void OnReceive(object message)
         {
             if (message is string) Console.WriteLine(message);
-            if(message is int)
+            else if (message is int)
             {
                 _counter += (int)message;
                 Console.WriteLine($"Actor has accumulated {_counter} points.");
             }
+            else { Console.WriteLine("What?"); }
         }
     }
 
