@@ -18,16 +18,22 @@ namespace Benefits.Domain.Tests
         {
             // Arrange
             var id = Guid.NewGuid().ToString("N");
-            var props = Props.Create(() => new BenefitEstimateActor(id));
-            var test = this.CreateTestProbe("testListener");
+            var test = this.CreateTestProbe();
             Sys.EventStream.Subscribe(test, typeof(Estimate));
-            var benefit = Sys.ActorOf(props, $"Estimate-{id}");
 
+            var benefit = Sys.ActorOf(Props.Create<BenefitEstimateActor>(id), $"Estimate-{id}");
+            System.Threading.Thread.Sleep(1000);
+
+            //Act
             AddEmployee(id, benefit);
             var estimate = test.ExpectMsg<Estimate>();
-
+            
             SetSalary(id, benefit);
-            estimate = test.ExpectMsg<Estimate>();
+            var estimate2 = test.ExpectMsg<Estimate>();
+            
+            //Assert
+            Assert.AreEqual(1000, estimate.AnnualCost);
+            Assert.AreEqual(1000, estimate2.AnnualCost);
         }
 
         private void AddEmployee(string id, IActorRef benefit)
@@ -37,14 +43,14 @@ namespace Benefits.Domain.Tests
             benefit.Tell(cmd);
 
             // Assert
-            var result = ExpectMsg<OperationResult>(new TimeSpan(0, 0, 15));
+            var result = ExpectMsg<Domain.OperationResult>(new TimeSpan(0, 0, 15));
             Assert.True(result.IsSuccess);
         }
 
         private void SetSalary(string id, IActorRef benefit)
         {
             // Act
-            var cmd = new Commands.SetEmployeeSalary(id, 26*2000, 26);
+            var cmd = new Commands.SetEmployeeSalary(id, 26 * 2000, 26);
             benefit.Tell(cmd);
 
             // Assert

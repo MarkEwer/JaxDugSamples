@@ -7,8 +7,8 @@
             this.FirstName = firstName;
             this.LastName = lastName;
         }
-        public string FirstName { get; }
-        public string LastName { get; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
         private decimal DiscountRate
         {
             get
