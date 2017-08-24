@@ -1,6 +1,7 @@
 ﻿using Benefits.Domain.Events;
 using Benefits.Domain.Models;
 using d60.Cirqus.Aggregates;
+using d60.Cirqus.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,14 @@ using System.Threading.Tasks;
 
 namespace Benefits.Domain
 {
-    public class BenefitEstimateRoot : AggregateRoot 
+    public class BenefitEstimateRoot : AggregateRoot
+        , IEmit<Events.EstimateCreated>
+        , IEmit<Events.DependentAdded>
+        , IEmit<Events.DependentRemoved>
+        , IEmit<Events.SalarySpecified>
+        , IEmit<Events.SpouseAdded>
+        , IEmit<Events.SpouseRemoved>
+
     {
         #region Model Data
         public Person? Employee { get; protected set; }
@@ -35,6 +43,7 @@ namespace Benefits.Domain
         public void Apply(Events.EstimateCreated evt)
         {
             this.Employee = new Person(evt.FirstName, evt.LastName);
+            this._dependents = new List<Person>();
             this.MaritalStatus = evt.MaritalStatus;
         }
 
@@ -54,7 +63,7 @@ namespace Benefits.Domain
         {
             this._dependents.Add(new Person(evt.FirstName, evt.LastName));
         }
-
+        
         public void Apply(Events.SpouseRemoved evt)
         {
             this.Spouse = null;
@@ -159,79 +168,5 @@ namespace Benefits.Domain
         }
 
         #endregion Command Handlers
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //        private List<Func<Models.Estimate, Models.Estimate>> _rules;
-
-        //        public BenefitEstimateActor(string id):base()
-        //        {
-        //            this._rules = new List<Func<Models.Estimate, Models.Estimate>>();
-        //        }
-
-        //        private void InitializeCommandHandlers()
-        //        {
-        //            this.Receive<Commands.AddEmployeeToBenefitsEstimate>(cmd => 
-        //                this.AddEmployee(cmd)
-        //                );
-        //            this.Receive<Commands.SetEmployeeSalary>(cmd => this.SetSalary(cmd));
-        //            this.Receive<Commands.AddSpouseToBenefitsEstimate>(cmd => this.AddSpouse(cmd));
-        //            this.Receive<Commands.AddDependentToBenefitsEstimate>(cmd => this.AddDependent(cmd));
-        //            this.Receive<Commands.RemoveSpouseToBenefitsEstimate>(cmd => this.RemoveSpouse(cmd));
-        //            this.Receive<Commands.RemoveDependentToBenefitsEstimate>(cmd => this.RemoveDependent(cmd));
-        //            this.Receive<string>(x => 
-        //                System.Diagnostics.Debug.WriteLine(x)
-        //                );
-        //            this.ReceiveAny(cmd =>
-        //            {
-        //                Sender.Tell(OperationResult.Failure(this.Id), Self);
-        //            });
-
-        //            //this.Command<Commands.AddEmployeeToBenefitsEstimate>(cmd =>
-        //            //    this.AddEmployee(cmd)
-        //            //    );
-        //            //this.Command<Commands.SetEmployeeSalary>(cmd => this.SetSalary(cmd));
-        //            //this.Command<Commands.AddSpouseToBenefitsEstimate>(cmd => this.AddSpouse(cmd));
-        //            //this.Command<Commands.AddDependentToBenefitsEstimate>(cmd => this.AddDependent(cmd));
-        //            //this.Command<Commands.RemoveSpouseToBenefitsEstimate>(cmd => this.RemoveSpouse(cmd));
-        //            //this.Command<Commands.RemoveDependentToBenefitsEstimate>(cmd => this.RemoveDependent(cmd));
-        //            //this.Command<string>(x =>
-        //            //    System.Diagnostics.Debug.WriteLine(x)
-        //            //    );
-        //            //this.CommandAny(cmd =>
-        //            //{
-        //            //    Sender.Tell(OperationResult.Failure(this.Id), Self);
-        //            //});
-        //        }
-
-        //        private void InitializeEventRecovery()
-        //        {
-        //            //this.Recover<Events.EstimateCreated>(evt => this.Apply(evt));
-        //            //this.Recover<Events.SalarySpecified>(evt => this.Apply(evt));
-        //            //this.Recover<Events.SpouseAdded>(evt => this.Apply(evt));
-        //            //this.Recover<Events.DependentAdded>(evt => this.Apply(evt));
-        //            //this.Recover<Events.SpouseRemoved>(evt => this.Apply(evt));
-        //            //this.Recover<Events.DependentRemoved>(evt => this.Apply(evt));
-        //        }
-
-        //        // Command Handlers
     }
 }
