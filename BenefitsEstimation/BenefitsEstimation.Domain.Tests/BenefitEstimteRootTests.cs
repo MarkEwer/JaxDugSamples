@@ -1,7 +1,9 @@
 ﻿using Benefits.Domain.Models;
 using Benefits.Domain.ViewModels;
 using d60.Cirqus;
+using d60.Cirqus.Events;
 using d60.Cirqus.Ntfs.Config;
+using d60.Cirqus.Testing.Internals;
 using d60.Cirqus.Views;
 using d60.Cirqus.Views.ViewManagers;
 using NUnit.Framework;
@@ -17,32 +19,23 @@ namespace Benefits.Domain.Tests
     [TestFixture]
     public class BenefitEstimteRootTests
     {
-        private static readonly string EVENTS_FOLDER = "UnitTestEvents";
         private static readonly TimeSpan TIMEOUT = new TimeSpan(0, 0, 5);
 
         private ICommandProcessor _processor;
-        private List<IViewManager> _viewManagers;
-        private InMemoryViewManager<BenefitEstimateViewModel> _view = new InMemoryViewManager<BenefitEstimateViewModel>();
+        private IEventStore _eventstore;
+        private InMemoryViewManager<BenefitEstimateViewModel> _view;
 
         [OneTimeSetUp] public void StartDomain()
         {
-            var path = this.GetType().Assembly.Location;
-            path = path.Substring(0, path.LastIndexOf("\\"));
-            path = Path.Combine(path, EVENTS_FOLDER);
-
-            if (Directory.Exists(path)) Directory.Delete(path, true);
-            Directory.CreateDirectory(path);
+            _view = new InMemoryViewManager<BenefitEstimateViewModel>();
+            _eventstore = new InMemoryEventStore();
 
             _processor = CommandProcessor.With()
-                .EventStore(c => c.UseFiles(path))
-                .EventDispatcher(e => e.UseViewManagerEventDispatcher(GetViewManagers().ToArray()))
+                .EventStore(c => c.RegisterInstance(_eventstore))
+                .EventDispatcher(e => e.UseViewManagerEventDispatcher(new IViewManager[] { _view }))
                 .Create();
         }
-        public List<IViewManager> GetViewManagers()
-        {
-            _viewManagers = new List<IViewManager> { _view };
-            return _viewManagers;
-        }
+
         [OneTimeTearDown] public void StopDomain()
         {
             _processor.Dispose();
@@ -120,6 +113,65 @@ namespace Benefits.Domain.Tests
             Assert.AreEqual(Math.Round(2000d / 26d, 2), v.DeductionPerPaycheck);
         }
 
+
+        [Test]
+        public void ValidateQuoteWhenWeAddThemAllThenRemoveThemAll()
+        {
+            // Arrange
+            var id = Guid.NewGuid().ToString("N");
+
+            //Act
+            AddEmployee(id);
+            SetSalary(id);
+            AddSpouse(id, "Heather", "Ewer");
+            AddDependent(id, "Nora", "Ewer");
+            AddDependent(id, "Matthew", "Ewer");
+            AddDependent(id, "Seth", "Ewer");
+            AddDependent(id, "Rose", "Ewer");
+            RemoveSpouse(id, "Heather", "Ewer");
+            RemoveDependent(id, "Nora", "Ewer");
+            RemoveDependent(id, "Matthew", "Ewer");
+            RemoveDependent(id, "Seth", "Ewer");
+            RemoveDependent(id, "Rose", "Ewer");
+
+            System.Threading.Thread.Sleep(1000); //Wait for view to catch up.
+            var v = _view.Load(id);
+
+            //Assert
+            Assert.AreEqual("Mark", v.Employee.Value.FirstName);
+            Assert.AreEqual(26 * 2000, v.Salary);
+            Assert.IsFalse(v.Spouse.HasValue);
+            Assert.AreEqual(Math.Round(1000d / 26d, 2), v.DeductionPerPaycheck);
+            Assert.AreEqual(0, v.Dependents.Count());
+        }
+
+        [Test]
+        public void ValidateQuoteForEmployeeWithSpouseAndTwoMinusOneChildren()
+        {
+            // Arrange
+            var id = Guid.NewGuid().ToString("N");
+
+            //Act
+            AddEmployee(id);
+            SetSalary(id);
+            AddSpouse(id, "Heather", "Ewer");
+            AddDependent(id, "Nora", "Ewer");
+            AddDependent(id, "Matthew", "Ewer");
+            RemoveDependent(id, "Matthew", "Ewer");
+
+            System.Threading.Thread.Sleep(1000); //Wait for view to catch up.
+            var v = _view.Load(id);
+
+            //Assert
+            Assert.AreEqual("Mark", v.Employee.Value.FirstName);
+            Assert.AreEqual(26 * 2000, v.Salary);
+            Assert.AreEqual("Heather", v.Spouse.Value.FirstName);
+            Assert.AreEqual(1, v.Dependents.Count());
+
+            // (1000 for employee) + (500 for spouse) + (500 for child) = 2000 per year
+            Assert.AreEqual(Math.Round(2000d / 26d, 2), v.DeductionPerPaycheck);
+        }
+
         private void AddEmployee(string id)
         {
             // Act
@@ -154,10 +206,32 @@ namespace Benefits.Domain.Tests
             _view.WaitUntilProcessed(result, TIMEOUT);
         }
 
+        private void RemoveSpouse(string id, string firstName, string lastName)
+        {
+            // Act
+            var cmd = new Commands.RemoveSpouseToBenefitsEstimate(id, firstName, lastName);
+            var result = _processor.ProcessCommand(cmd);
+
+            // Assert
+            Assert.True(result.EventsWereEmitted);
+            _view.WaitUntilProcessed(result, TIMEOUT);
+        }
+
         private void AddDependent(string id, string firstName, string lastName)
         {
             // Act
             var cmd = new Commands.AddDependentToBenefitsEstimate(id, firstName, lastName);
+            var result = _processor.ProcessCommand(cmd);
+
+            // Assert
+            Assert.True(result.EventsWereEmitted);
+            _view.WaitUntilProcessed(result, TIMEOUT);
+        }
+
+        private void RemoveDependent(string id, string firstName, string lastName)
+        {
+            // Act
+            var cmd = new Commands.RemoveDependentToBenefitsEstimate(id, firstName, lastName);
             var result = _processor.ProcessCommand(cmd);
 
             // Assert

@@ -34,6 +34,9 @@
     <Reference Include="d60.Cirqus, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\d60.Cirqus.0.69.0\lib\NET45\d60.Cirqus.dll</HintPath>
     </Reference>
+    <Reference Include="d60.Cirqus.Identity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\d60.Cirqus.Identity.0.69.0\lib\NET45\d60.Cirqus.Identity.dll</HintPath>
+    </Reference>
     <Reference Include="d60.Cirqus.MsSql, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\d60.Cirqus.MsSql.0.34.0\lib\NET45\d60.Cirqus.MsSql.dll</HintPath>
     </Reference>

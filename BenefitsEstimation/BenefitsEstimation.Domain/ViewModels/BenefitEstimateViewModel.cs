@@ -44,45 +44,45 @@ namespace Benefits.Domain.ViewModels
         #endregion Model Data
 
         #region Event Handlers
-        public void Handle(IViewContext context, Events.EstimateCreated evt)
+        public void Handle(IViewContext context, Events.EstimateCreated domainEvent)
         {
-            this.Employee = new Person(evt.FirstName, evt.LastName);
+            this.Employee = new Person(domainEvent.FirstName, domainEvent.LastName);
             this._dependents = new List<Person>();
-            this.MaritalStatus = evt.MaritalStatus;
+            this.MaritalStatus = domainEvent.MaritalStatus;
             this.CalculateEstimate();
         }
 
-        public void Handle(IViewContext context, Events.SalarySpecified evt)
+        public void Handle(IViewContext context, Events.SalarySpecified domainEvent)
         {
-            this.Salary = evt.AnnualSalary;
-            this.NumberOfPaychecksPerYear = evt.NumberOfPaychecksPerYear;
+            this.Salary = domainEvent.AnnualSalary;
+            this.NumberOfPaychecksPerYear = domainEvent.NumberOfPaychecksPerYear;
             this.CalculateEstimate();
         }
 
-        public void Handle(IViewContext context, Events.SpouseAdded evt)
+        public void Handle(IViewContext context, Events.SpouseAdded domainEvent)
         {
-            this.Spouse = new Person(evt.FirstName, evt.LastName);
+            this.Spouse = new Person(domainEvent.FirstName, domainEvent.LastName);
             this.InludeSpouse = true;
             this.CalculateEstimate();
         }
 
-        public void Handle(IViewContext context, Events.DependentAdded evt)
+        public void Handle(IViewContext context, Events.DependentAdded domainEvent)
         {
-            this._dependents.Add(new Person(evt.FirstName, evt.LastName));
+            this._dependents.Add(new Person(domainEvent.FirstName, domainEvent.LastName));
             this.CalculateEstimate();
         }
 
-        public void Handle(IViewContext context, Events.SpouseRemoved evt)
+        public void Handle(IViewContext context, Events.SpouseRemoved domainEvent)
         {
             this.Spouse = null;
             this.CalculateEstimate();
         }
 
-        public void Handle(IViewContext context, Events.DependentRemoved evt)
+        public void Handle(IViewContext context, Events.DependentRemoved domainEvent)
         {
             this._dependents.RemoveAll(x =>
-                   x.FirstName.Equals(evt.FirstName, StringComparison.OrdinalIgnoreCase)
-                && x.LastName.Equals(evt.LastName, StringComparison.OrdinalIgnoreCase));
+                   x.FirstName.Equals(domainEvent.FirstName, StringComparison.OrdinalIgnoreCase)
+                && x.LastName.Equals(domainEvent.LastName, StringComparison.OrdinalIgnoreCase));
             this.CalculateEstimate();
         }
         #endregion Event Handlers

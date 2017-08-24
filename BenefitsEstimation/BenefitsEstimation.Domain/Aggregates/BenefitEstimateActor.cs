@@ -40,40 +40,40 @@ namespace Benefits.Domain
         #endregion Model Data
 
         #region Event Handlers
-        public void Apply(Events.EstimateCreated evt)
+        public void Apply(Events.EstimateCreated e)
         {
-            this.Employee = new Person(evt.FirstName, evt.LastName);
+            this.Employee = new Person(e.FirstName, e.LastName);
             this._dependents = new List<Person>();
-            this.MaritalStatus = evt.MaritalStatus;
+            this.MaritalStatus = e.MaritalStatus;
         }
 
-        public void Apply(Events.SalarySpecified evt)
+        public void Apply(Events.SalarySpecified e)
         {
-            this.Salary = evt.AnnualSalary;
-            this.NumberOfPaychecksPerYear = evt.NumberOfPaychecksPerYear;
+            this.Salary = e.AnnualSalary;
+            this.NumberOfPaychecksPerYear = e.NumberOfPaychecksPerYear;
         }
 
-        public void Apply(Events.SpouseAdded evt)
+        public void Apply(Events.SpouseAdded e)
         {
-            this.Spouse = new Person(evt.FirstName, evt.LastName);
+            this.Spouse = new Person(e.FirstName, e.LastName);
             this.InludeSpouse = true;
         }
 
-        public void Apply(Events.DependentAdded evt)
+        public void Apply(Events.DependentAdded e)
         {
-            this._dependents.Add(new Person(evt.FirstName, evt.LastName));
+            this._dependents.Add(new Person(e.FirstName, e.LastName));
         }
         
-        public void Apply(Events.SpouseRemoved evt)
+        public void Apply(Events.SpouseRemoved e)
         {
             this.Spouse = null;
         }
 
-        public void Apply(Events.DependentRemoved evt)
+        public void Apply(Events.DependentRemoved e)
         {
             this._dependents.RemoveAll(x =>
-                   x.FirstName.Equals(evt.FirstName, StringComparison.OrdinalIgnoreCase)
-                && x.LastName.Equals(evt.LastName, StringComparison.OrdinalIgnoreCase));
+                   x.FirstName.Equals(e.FirstName, StringComparison.OrdinalIgnoreCase)
+                && x.LastName.Equals(e.LastName, StringComparison.OrdinalIgnoreCase));
         }
         #endregion Event Handlers
 
@@ -142,7 +142,7 @@ namespace Benefits.Domain
                 && this.Spouse.Value.LastName.Equals(cmd.LastName, StringComparison.OrdinalIgnoreCase)
                 )
             {
-                var evt = new Events.SpouseAdded(this.Id, cmd.FirstName, cmd.LastName);
+                var evt = new Events.SpouseRemoved(this.Id, cmd.FirstName, cmd.LastName);
                 this.Emit(evt);
                 //var estimate = this.BroadcastEstimate();
             }
