@@ -17,17 +17,17 @@ namespace Benefits.Web.Hubs
             var result = this._processor.ProcessCommand(cmd);
         }
 
+        public void SetSalary(SetEmployeeSalary cmd)
+        {
+            var result = this._processor.ProcessCommand(cmd);
+        }
+
         public void AddSpouse(AddSpouseToBenefitsEstimate cmd)
         {
             var result = this._processor.ProcessCommand(cmd);
         }
 
         public void AddDependent(AddDependentToBenefitsEstimate cmd)
-        {
-            var result = this._processor.ProcessCommand(cmd);
-        }
-
-        public void SetSalary(SetEmployeeSalary cmd)
         {
             var result = this._processor.ProcessCommand(cmd);
         }

@@ -29,6 +29,11 @@ var app = new Vue({
             if (shouldSave) {
                 this.addEmployee.id = this.hub.connection.id;
                 this.hub.server.addEmployee(this.addEmployee);
+                this.hub.server.setSalary({
+                    id: this.hub.connection.id,
+                    annualSalary: 52000,
+                    numberOfPaychecksPerYear: 26
+                });
             }
         },
         closeSpouseDialog(ref, shouldSave) {
@@ -44,6 +49,20 @@ var app = new Vue({
                 this.addDependent.id = this.hub.connection.id;
                 this.hub.server.addDependent(this.addDependent);
             }
+        },
+        removeSpouse() {
+            this.hub.server.removeSpouse({
+                id: this.hub.connection.id,
+                firstName: this.benefitQuote.Spouse.FirstName,
+                lastName: this.benefitQuote.Spouse.LastName
+            });
+        },
+        removeDependent(dependent) {
+            this.hub.server.removeDependent({
+                id: this.hub.connection.id,
+                firstName: dependent.FirstName,
+                lastName: dependent.LastName
+            });
         }
     },
     mounted: function () {

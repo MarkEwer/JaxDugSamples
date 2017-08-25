@@ -15,25 +15,27 @@
     <div id="app">
         <md-toolbar>
             <h1 class="md-title" v-text="title" style="flex: 1"></h1>
-            <md-button id="addEmployee" @click="openDialog('addEmployeeDialog')">
+            <md-button id="addEmployee" @click="openDialog('addEmployeeDialog')" v-if="!benefitQuote.Employee">
                 <md-icon>face</md-icon>
                 Employee
             </md-button>
-            <md-button id="addSpouse" @click="openDialog('addSpouseDialog')">
+            <md-button id="addSpouse" @click="openDialog('addSpouseDialog')" v-if="benefitQuote.Employee && !benefitQuote.Spouse">
                 <md-icon>person_add</md-icon>
                 Add Spouse
             </md-button>
-            <md-button id="addDependent" @click="openDialog('addDependentDialog')">
+            <md-button id="addDependent" @click="openDialog('addDependentDialog')" v-if="benefitQuote.Employee">
                 <md-icon>group_add</md-icon>
                 Add Dependents
             </md-button>
         </md-toolbar>
 
-        <md-card v-if="benefitQuote.employee">
+        <md-layout md-gutter>
+
+        <md-card v-if="benefitQuote.Employee" class="employeeCard">
             <md-card-header>
                 <md-card-header-text>
                     <div class="md-title">Employee</div>
-                    <div class="md-subhead">{{benefitQuote.employee.firstName}} {{benefitQuote.employee.lastName}}</div>
+                    <div class="md-subhead">{{benefitQuote.Employee.FirstName}} {{benefitQuote.Employee.LastName}}</div>
                 </md-card-header-text>
 
                 <md-card-media>
@@ -41,6 +43,48 @@
                 </md-card-media>
             </md-card-header>
         </md-card>
+
+        <md-card v-if="benefitQuote.Spouse" class="spouseCard">
+            <md-card-header>
+                <md-card-header-text>
+                    <div class="md-title">Spouse</div>
+                    <div class="md-subhead">{{benefitQuote.Spouse.FirstName}} {{benefitQuote.Spouse.LastName}}</div>
+                </md-card-header-text>
+
+                <md-card-media>
+                    <md-icon>person</md-icon>
+                </md-card-media>
+            </md-card-header>
+            <md-card-actions>
+                <md-button @click="removeSpouse()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </md-card-actions>
+        </md-card>
+        </md-layout>
+
+        <ul>
+            <li v-for="item in benefitQuote.Dependents">
+                <div class="md-subhead">{{item.FirstName}} {{item.LastName}}</div>
+            </li>
+        </ul>
+
+        <md-list>
+            <md-list-item v-for="item in benefitQuote.Dependents">
+                <md-icon>person</md-icon> 
+                <span>{{item.FirstName}} {{item.LastName}}</span>
+                <md-button class="md-icon-button md-list-action" 
+                           @click="removeDependent(item)">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </md-list-item>
+        </md-list>
+
+
+
+
+
+
 
         <md-dialog md-open-from="#addEmployee" md-close-to="#addEmployee" ref="addEmployeeDialog">
             <md-dialog-title>Add Employee's Info</md-dialog-title>
@@ -108,7 +152,7 @@
             </md-dialog-actions>
         </md-dialog>
 
-    </div>
+</div>
 
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/vue-material@0.7.4"></script>
