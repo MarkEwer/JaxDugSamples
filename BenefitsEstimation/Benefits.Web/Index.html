@@ -2,9 +2,141 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Benefits Cost Estimation</title>
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://unpkg.com/vue-material@0.7.4/dist/vue-material.css" />
+    <link rel="stylesheet" href="styles.css" />
+
 </head>
 <body>
 
+    <div id="app">
+        <md-toolbar>
+            <h1 class="md-title" v-text="title" style="flex: 1"></h1>
+            <md-button id="addEmployee" @click="openDialog('addEmployeeDialog')">
+                <md-icon>face</md-icon>
+                Employee
+            </md-button>
+            <md-button id="addSpouse" @click="openDialog('addSpouseDialog')">
+                <md-icon>person_add</md-icon>
+                Add Spouse
+            </md-button>
+            <md-button id="addDependent" @click="openDialog('addDependentDialog')">
+                <md-icon>group_add</md-icon>
+                Add Dependents
+            </md-button>
+        </md-toolbar>
+        <span v-text="message"></span>
+
+
+
+        <md-dialog md-open-from="#addEmployee" md-close-to="#addEmployee" ref="addEmployeeDialog">
+            <md-dialog-title>Add Employee's Info</md-dialog-title>
+
+            <md-dialog-content>
+                <form>
+                    <md-input-container>
+                        <label>First Name</label>
+                        <md-input v-model="addEmployee.firstName"></md-input>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Last Name</label>
+                        <md-input v-model="addEmployee.lastName"></md-input>
+                    </md-input-container>
+                </form>
+            </md-dialog-content>
+
+            <md-dialog-actions>
+                <md-button class="md-primary" @click="closeDialog('addEmployeeDialog',false)">Cancel</md-button>
+                <md-button class="md-primary" @click="closeDialog('addEmployeeDialog',true )">Create</md-button>
+            </md-dialog-actions>
+        </md-dialog>
+
+        <md-dialog md-open-from="#addSpouse" md-close-to="#addSpouse" ref="addSpouseDialog">
+            <md-dialog-title>Add Spouse's Info</md-dialog-title>
+
+            <md-dialog-content>
+                <form>
+                    <md-input-container>
+                        <label>First Name</label>
+                        <md-input v-model="addSpouse.firstName"></md-input>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Last Name</label>
+                        <md-input v-model="addSpouse.lastName"></md-input>
+                    </md-input-container>
+                </form>
+            </md-dialog-content>
+
+            <md-dialog-actions>
+                <md-button class="md-primary" @click="closeDialog('addSpouseDialog',false)">Cancel</md-button>
+                <md-button class="md-primary" @click="closeDialog('addSpouseDialog',true )">Create</md-button>
+            </md-dialog-actions>
+        </md-dialog>
+
+        <md-dialog md-open-from="#addDependent" md-close-to="#addDependent" ref="addDependentDialog">
+            <md-dialog-title>Add A Dependant's Info</md-dialog-title>
+
+            <md-dialog-content>
+                <form>
+                    <md-input-container>
+                        <label>First Name</label>
+                        <md-input v-model="addDependent.firstName"></md-input>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Last Name</label>
+                        <md-input v-model="addDependent.lastName"></md-input>
+                    </md-input-container>
+                </form>
+            </md-dialog-content>
+
+            <md-dialog-actions>
+                <md-button class="md-primary" @click="closeDialog('addDependentDialog',false)">Cancel</md-button>
+                <md-button class="md-primary" @click="closeDialog('addDependentDialog',true )">Create</md-button>
+            </md-dialog-actions>
+        </md-dialog>
+
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-material@0.7.4"></script>
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="signalr/hubs"></script>
+
+    <script>
+        Vue.use(VueMaterial);
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                title: 'Benefits Cost Estimator',
+                message: 'Hello Vue!',
+                benefitQuote: {},
+                addEmployee: {
+                    firstName: "",
+                    lastName:""
+                },
+                addSpouse: {
+                    firstName: "",
+                    lastName: ""
+                },
+                addDependent: {
+                    firstName: "",
+                    lastName: ""
+                }
+            },
+            methods: {
+                openDialog(ref) {
+                    this.$refs[ref].open();
+                },
+                closeDialog(ref, shouldSave) {
+                    this.$refs[ref].close();
+                }
+            }
+        })
+    </script>
 </body>
 </html>
