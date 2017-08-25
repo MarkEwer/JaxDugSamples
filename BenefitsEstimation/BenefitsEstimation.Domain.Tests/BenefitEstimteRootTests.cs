@@ -170,6 +170,30 @@ namespace Benefits.Domain.Tests
             // (1000 for employee) + (500 for spouse) + (500 for child) = 2000 per year
             Assert.AreEqual(Math.Round(2000d / 26d, 2), v.DeductionPerPaycheck);
         }
+        [Test]
+        public void ValidateQuoteForEmployeeWithSpouseAndOneChildAndAllHaveDiscounts()
+        {
+            // Arrange
+            var id = Guid.NewGuid().ToString("N");
+
+            //Act
+            AddEmployee(id);
+            SetSalary(id);
+            AddSpouse(id, "Alison", "Ewer");
+            AddDependent(id, "Alex", "Ewer");
+
+            System.Threading.Thread.Sleep(1000); //Wait for view to catch up.
+            var v = _view.Load(id);
+
+            //Assert
+            Assert.AreEqual("Mark", v.Employee.Value.FirstName);
+            Assert.AreEqual(26 * 2000, v.Salary);
+            Assert.AreEqual("Alison", v.Spouse.Value.FirstName);
+            Assert.AreEqual(1, v.Dependents.Count());
+
+            // (1000 for employee) + (450 for spouse) + (450 for child) = 1900 per year
+            Assert.AreEqual(Math.Round(1900d / 26d, 2), v.DeductionPerPaycheck);
+        }
 
         private void AddEmployee(string id)
         {
