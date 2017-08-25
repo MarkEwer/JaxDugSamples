@@ -44,7 +44,7 @@ namespace Benefits.Domain
         {
             this.Employee = new Person(e.FirstName, e.LastName);
             this._dependents = new List<Person>();
-            this.MaritalStatus = e.MaritalStatus;
+            this.MaritalStatus = MaritalStatus.Single;
         }
 
         public void Apply(Events.SalarySpecified e)
@@ -56,6 +56,7 @@ namespace Benefits.Domain
         public void Apply(Events.SpouseAdded e)
         {
             this.Spouse = new Person(e.FirstName, e.LastName);
+            this.MaritalStatus = MaritalStatus.Maried;
             this.InludeSpouse = true;
         }
 
@@ -67,6 +68,7 @@ namespace Benefits.Domain
         public void Apply(Events.SpouseRemoved e)
         {
             this.Spouse = null;
+            this.MaritalStatus = MaritalStatus.Single;
         }
 
         public void Apply(Events.DependentRemoved e)
@@ -86,9 +88,8 @@ namespace Benefits.Domain
             }
             else
             {
-                var evt = new EstimateCreated(this.Id, cmd.FirstName, cmd.LastName, cmd.MaritalStatus);
+                var evt = new EstimateCreated(this.Id, cmd.FirstName, cmd.LastName);
                 this.Emit(evt);
-                //var estimate = this.BroadcastEstimate();
             }
         }
 

@@ -10,16 +10,14 @@ namespace Benefits.Domain.Commands
 {
     public class AddEmployeeToBenefitsEstimate : Command<BenefitEstimateRoot>
     {
-        public AddEmployeeToBenefitsEstimate(string id, string firstName, string lastName, MaritalStatus maritalStatus):base(id)
+        public AddEmployeeToBenefitsEstimate(string id, string firstName, string lastName):base(id)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
-            this.MaritalStatus = maritalStatus;
         }
 
         public string FirstName { get; protected set; }
         public string LastName { get; protected set; }
-        public MaritalStatus MaritalStatus { get; protected set; }
 
         public override void Execute(BenefitEstimateRoot aggregateRoot)
         {

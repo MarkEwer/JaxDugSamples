@@ -48,7 +48,7 @@ namespace Benefits.Domain.ViewModels
         {
             this.Employee = new Person(domainEvent.FirstName, domainEvent.LastName);
             this._dependents = new List<Person>();
-            this.MaritalStatus = domainEvent.MaritalStatus;
+            this.MaritalStatus = MaritalStatus.Single;
             this.CalculateEstimate();
         }
 
@@ -63,6 +63,7 @@ namespace Benefits.Domain.ViewModels
         {
             this.Spouse = new Person(domainEvent.FirstName, domainEvent.LastName);
             this.InludeSpouse = true;
+            this.MaritalStatus = MaritalStatus.Maried;
             this.CalculateEstimate();
         }
 
@@ -75,6 +76,8 @@ namespace Benefits.Domain.ViewModels
         public void Handle(IViewContext context, Events.SpouseRemoved domainEvent)
         {
             this.Spouse = null;
+            this.InludeSpouse = false;
+            this.MaritalStatus = MaritalStatus.Single;
             this.CalculateEstimate();
         }
 

@@ -28,9 +28,19 @@
                 Add Dependents
             </md-button>
         </md-toolbar>
-        <span v-text="message"></span>
 
+        <md-card v-if="benefitQuote.employee">
+            <md-card-header>
+                <md-card-header-text>
+                    <div class="md-title">Employee</div>
+                    <div class="md-subhead">{{benefitQuote.employee.firstName}} {{benefitQuote.employee.lastName}}</div>
+                </md-card-header-text>
 
+                <md-card-media>
+                    <md-icon>face</md-icon>
+                </md-card-media>
+            </md-card-header>
+        </md-card>
 
         <md-dialog md-open-from="#addEmployee" md-close-to="#addEmployee" ref="addEmployeeDialog">
             <md-dialog-title>Add Employee's Info</md-dialog-title>
@@ -49,8 +59,8 @@
             </md-dialog-content>
 
             <md-dialog-actions>
-                <md-button class="md-primary" @click="closeDialog('addEmployeeDialog',false)">Cancel</md-button>
-                <md-button class="md-primary" @click="closeDialog('addEmployeeDialog',true )">Create</md-button>
+                <md-button class="md-primary" @click="closeEmployeeDialog('addEmployeeDialog',false)">Cancel</md-button>
+                <md-button class="md-primary" @click="closeEmployeeDialog('addEmployeeDialog',true )">Create</md-button>
             </md-dialog-actions>
         </md-dialog>
 
@@ -71,8 +81,8 @@
             </md-dialog-content>
 
             <md-dialog-actions>
-                <md-button class="md-primary" @click="closeDialog('addSpouseDialog',false)">Cancel</md-button>
-                <md-button class="md-primary" @click="closeDialog('addSpouseDialog',true )">Create</md-button>
+                <md-button class="md-primary" @click="closeSpouseDialog('addSpouseDialog',false)">Cancel</md-button>
+                <md-button class="md-primary" @click="closeSpouseDialog('addSpouseDialog',true )">Create</md-button>
             </md-dialog-actions>
         </md-dialog>
 
@@ -93,8 +103,8 @@
             </md-dialog-content>
 
             <md-dialog-actions>
-                <md-button class="md-primary" @click="closeDialog('addDependentDialog',false)">Cancel</md-button>
-                <md-button class="md-primary" @click="closeDialog('addDependentDialog',true )">Create</md-button>
+                <md-button class="md-primary" @click="closeDependentDialog('addDependentDialog',false)">Cancel</md-button>
+                <md-button class="md-primary" @click="closeDependentDialog('addDependentDialog',true )">Create</md-button>
             </md-dialog-actions>
         </md-dialog>
 
@@ -106,37 +116,7 @@
     <script src="Scripts/jquery.signalR-2.2.2.min.js"></script>
     <script src="signalr/hubs"></script>
 
-    <script>
-        Vue.use(VueMaterial);
+    <script src="app.js"></script>        
 
-        var app = new Vue({
-            el: '#app',
-            data: {
-                title: 'Benefits Cost Estimator',
-                message: 'Hello Vue!',
-                benefitQuote: {},
-                addEmployee: {
-                    firstName: "",
-                    lastName:""
-                },
-                addSpouse: {
-                    firstName: "",
-                    lastName: ""
-                },
-                addDependent: {
-                    firstName: "",
-                    lastName: ""
-                }
-            },
-            methods: {
-                openDialog(ref) {
-                    this.$refs[ref].open();
-                },
-                closeDialog(ref, shouldSave) {
-                    this.$refs[ref].close();
-                }
-            }
-        })
-    </script>
 </body>
 </html>
