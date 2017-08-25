@@ -9,6 +9,7 @@ using d60.Cirqus.Ntfs.Events;
 using d60.Cirqus.Events;
 using d60.Cirqus;
 using Benefits.Domain.ViewModels;
+using Microsoft.AspNet.SignalR;
 
 [assembly: OwinStartup(typeof(Benefits.Web.Startup))]
 
@@ -18,23 +19,26 @@ namespace Benefits.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            SetupCommandProcessor(app);
+            SetupCommandProcessor();
             app.MapSignalR();
         }
 
-        private void SetupCommandProcessor(IAppBuilder app)
+        private void SetupCommandProcessor()
         {
-            var _view = new InMemoryViewManager<BenefitEstimateViewModel>();
-            var viewManagers = new List<IViewManager> { _view };
+            var estimateViewModels = new InMemoryViewManager<BenefitEstimateViewModel>();
+            estimateViewModels.Updated += x => Broadcast(x);
+            var viewManagers = new List<IViewManager> { estimateViewModels };
+
             var eventstore = new NtfsEventStore(this.GetDataFolder());
             var processor = CommandProcessor.With()
                 .EventStore(c => c.RegisterInstance(eventstore))
                 .EventDispatcher(e => e.UseViewManagerEventDispatcher(viewManagers.ToArray()))
                 .Create();
 
-            TinyIoC.TinyIoCContainer.Current.Register<ICommandProcessor>(processor).AsSingleton();
-            TinyIoC.TinyIoCContainer.Current.Register<IEventStore>(eventstore).AsSingleton();
-            TinyIoC.TinyIoCContainer.Current.Register<List<IViewManager>>(viewManagers).AsSingleton();
+            TinyIoC.TinyIoCContainer.Current.Register<InMemoryViewManager<BenefitEstimateViewModel>>(estimateViewModels);
+            TinyIoC.TinyIoCContainer.Current.Register<ICommandProcessor>(processor);
+            TinyIoC.TinyIoCContainer.Current.Register<IEventStore>(eventstore);
+            TinyIoC.TinyIoCContainer.Current.Register<List<IViewManager>>(viewManagers);
         }
 
         private string GetDataFolder()
@@ -44,6 +48,14 @@ namespace Benefits.Web
             folder = System.IO.Path.Combine(folder, "EVENTSTORE_DATA");
             if (!System.IO.Directory.Exists(folder)) System.IO.Directory.CreateDirectory(folder);
             return folder;
+        }
+        
+        public static void Broadcast(BenefitEstimateViewModel estimate)
+        {
+            //var estimateViewModels = TinyIoC.TinyIoCContainer.Current.Resolve<InMemoryViewManager<BenefitEstimateViewModel>>();
+            var clients = GlobalHost.ConnectionManager.GetHubContext<Hubs.BenefitQuoteHub>().Clients;
+
+            clients.Client(estimate.Id).updateEstimate(estimate);
         }
     }
 }
