@@ -29,54 +29,49 @@
             </md-button>
         </md-toolbar>
 
-        <md-layout md-gutter>
-
-        <md-card v-if="benefitQuote.Employee" class="employeeCard">
-            <md-card-header>
-                <md-card-header-text>
-                    <div class="md-title">Employee</div>
-                    <div class="md-subhead">{{benefitQuote.Employee.FirstName}} {{benefitQuote.Employee.LastName}}</div>
-                </md-card-header-text>
-
-                <md-card-media>
-                    <md-icon>face</md-icon>
-                </md-card-media>
-            </md-card-header>
-        </md-card>
-
-        <md-card v-if="benefitQuote.Spouse" class="spouseCard">
-            <md-card-header>
-                <md-card-header-text>
-                    <div class="md-title">Spouse</div>
-                    <div class="md-subhead">{{benefitQuote.Spouse.FirstName}} {{benefitQuote.Spouse.LastName}}</div>
-                </md-card-header-text>
-
-                <md-card-media>
-                    <md-icon>person</md-icon>
-                </md-card-media>
-            </md-card-header>
-            <md-card-actions>
-                <md-button @click="removeSpouse()">
-                    <md-icon>close</md-icon>
-                </md-button>
-            </md-card-actions>
-        </md-card>
-        </md-layout>
-
-        <ul>
+        <!--<ul>
             <li v-for="item in benefitQuote.Dependents">
                 <div class="md-subhead">{{item.FirstName}} {{item.LastName}}</div>
             </li>
-        </ul>
+        </ul>-->
 
         <md-list>
+            <md-list-item v-if="benefitQuote.Employee">
+                <md-icon>face</md-icon>
+                <span>{{benefitQuote.Employee.FirstName}} {{benefitQuote.Employee.LastName}}</span>
+                <span>${{benefitQuote.Employee.ActualCost}}</span>
+                <md-icon v-if="benefitQuote.Employee.DiscountRate<1">star_rate</md-icon>
+            </md-list-item>
+
+            <md-list-item v-if="benefitQuote.Spouse">
+                <md-icon>person</md-icon>
+                <span>{{benefitQuote.Spouse.FirstName}} {{benefitQuote.Spouse.LastName}}</span>
+                <span>${{benefitQuote.Spouse.ActualCost}}</span>
+                <md-icon v-if="benefitQuote.Spouse.DiscountRate<1">star_rate</md-icon>
+                <md-button class="md-icon-button md-list-action"
+                           @click="removeSpouse()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </md-list-item>
+
             <md-list-item v-for="item in benefitQuote.Dependents">
-                <md-icon>person</md-icon> 
+                <md-icon>group</md-icon> 
                 <span>{{item.FirstName}} {{item.LastName}}</span>
+                <span>${{item.ActualCost}}</span>
+                <md-icon v-if="item.DiscountRate<1">star_rate</md-icon>
                 <md-button class="md-icon-button md-list-action" 
                            @click="removeDependent(item)">
                     <md-icon>close</md-icon>
                 </md-button>
+            </md-list-item>
+
+            <md-list-item v-if="benefitQuote.Employee">
+                <h4>Deduction Per Paycheck:</h4>
+                <span>${{benefitQuote.DeductionPerPaycheck}}</span>
+            </md-list-item>
+            <md-list-item v-if="benefitQuote.Employee">
+                <h4>Total Annual Cost:</h4>
+                <span>${{benefitQuote.AnnualBenefitsCost}}</span>
             </md-list-item>
         </md-list>
 

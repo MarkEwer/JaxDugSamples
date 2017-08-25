@@ -46,7 +46,7 @@ namespace Benefits.Domain.ViewModels
         #region Event Handlers
         public void Handle(IViewContext context, Events.EstimateCreated domainEvent)
         {
-            this.Employee = new Person(domainEvent.FirstName, domainEvent.LastName);
+            this.Employee = new Person(domainEvent.FirstName, domainEvent.LastName, Config.BaseAnnualEmployeeBenefitCost);
             this._dependents = new List<Person>();
             this.MaritalStatus = MaritalStatus.Single;
             this.CalculateEstimate();
@@ -61,7 +61,7 @@ namespace Benefits.Domain.ViewModels
 
         public void Handle(IViewContext context, Events.SpouseAdded domainEvent)
         {
-            this.Spouse = new Person(domainEvent.FirstName, domainEvent.LastName);
+            this.Spouse = new Person(domainEvent.FirstName, domainEvent.LastName, Config.BaseAnnualDependentBenefitCost);
             this.InludeSpouse = true;
             this.MaritalStatus = MaritalStatus.Maried;
             this.CalculateEstimate();
@@ -69,7 +69,7 @@ namespace Benefits.Domain.ViewModels
 
         public void Handle(IViewContext context, Events.DependentAdded domainEvent)
         {
-            this._dependents.Add(new Person(domainEvent.FirstName, domainEvent.LastName));
+            this._dependents.Add(new Person(domainEvent.FirstName, domainEvent.LastName, Config.BaseAnnualDependentBenefitCost));
             this.CalculateEstimate();
         }
 

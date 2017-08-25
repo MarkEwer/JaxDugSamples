@@ -42,7 +42,7 @@ namespace Benefits.Domain
         #region Event Handlers
         public void Apply(Events.EstimateCreated e)
         {
-            this.Employee = new Person(e.FirstName, e.LastName);
+            this.Employee = new Person(e.FirstName, e.LastName, Config.BaseAnnualEmployeeBenefitCost);
             this._dependents = new List<Person>();
             this.MaritalStatus = MaritalStatus.Single;
         }
@@ -55,14 +55,14 @@ namespace Benefits.Domain
 
         public void Apply(Events.SpouseAdded e)
         {
-            this.Spouse = new Person(e.FirstName, e.LastName);
+            this.Spouse = new Person(e.FirstName, e.LastName, Config.BaseAnnualDependentBenefitCost);
             this.MaritalStatus = MaritalStatus.Maried;
             this.InludeSpouse = true;
         }
 
         public void Apply(Events.DependentAdded e)
         {
-            this._dependents.Add(new Person(e.FirstName, e.LastName));
+            this._dependents.Add(new Person(e.FirstName, e.LastName, Config.BaseAnnualDependentBenefitCost));
         }
         
         public void Apply(Events.SpouseRemoved e)

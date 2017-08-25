@@ -2,14 +2,15 @@
 {
     public struct Person
     {
-        public Person(string firstName, string lastName)
+        public Person(string firstName, string lastName, decimal baseCost)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
+            this.BaseCost = baseCost;
         }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        private decimal DiscountRate
+        public decimal DiscountRate
         {
             get
             {
@@ -24,6 +25,8 @@
                 }
             }
         }
+        public decimal BaseCost { get; private set; }
+        public decimal ActualCost { get { return this.ApplyDiscountRate(this.BaseCost); } }
         public decimal ApplyDiscountRate(decimal baseCost)
         {
             return this.DiscountRate * baseCost;
