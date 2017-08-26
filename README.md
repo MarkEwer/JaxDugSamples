@@ -2,6 +2,18 @@
 In this repository I store the sample code and presentation slides for the talks I have given at 
 [JaxDug](https://www.meetup.com/Jaxdug/).
 
+## CQRS and DDD
+this presentation shows how to implement a CQRS system and a couple of frameworks you can use on the .Net platform.  This is the presentaiton I gave at [Code Impact 2017](http://www.codeimpact.org).
+
+## Evolution of CQRS+ES
+This presentation attempted to show how the CQRS and ES design patterns are natural evolutionary steps to 
+when you are growing an application.  Separating the commands from the queries in a system is a way to really
+enhance the overall system performance while Event Sourcing is a response to the complexity of cache item
+invalidation.
+
+You can find the sample code and presentation in the 
+[CQRS ES Sample folder](https://github.com/MarkEwer/JaxDugSamples/tree/master/CQRS_ES_Sample).
+
 ## Overview and Demo of Akka.Net (June 8th, 2017)
 
 The first presentation is on the [Akka.Net framework](http://getakka.net/).  Akka.net is an implementation of 
@@ -17,11 +29,3 @@ themselves to a CQRS and Event Sourcing as a method of data persistence.
 You can find the sample code and presentation slides for this in the 
 [Akka_Sample folder](https://github.com/MarkEwer/JaxDugSamples/tree/master/Akka_Sample).
 
-## Evolution of CQRS+ES
-This presentation attempted to show how the CQRS and ES design patterns are natural evolutionary steps to 
-when you are growing an application.  Separating the commands from the queries in a system is a way to really
-enhance the overall system performance while Event Sourcing is a response to the complexity of cache item
-invalidation.
-
-You can find the sample code and presentation in the 
-[CQRS ES Sample folder](https://github.com/MarkEwer/JaxDugSamples/tree/master/CQRS_ES_Sample).
