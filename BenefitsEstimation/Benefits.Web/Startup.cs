@@ -52,9 +52,7 @@ namespace Benefits.Web
         
         public static void Broadcast(BenefitEstimateViewModel estimate)
         {
-            //var estimateViewModels = TinyIoC.TinyIoCContainer.Current.Resolve<InMemoryViewManager<BenefitEstimateViewModel>>();
             var clients = GlobalHost.ConnectionManager.GetHubContext<Hubs.BenefitQuoteHub>().Clients;
-
             clients.Client(estimate.Id).updateEstimate(estimate);
         }
     }
