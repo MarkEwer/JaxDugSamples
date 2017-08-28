@@ -3,7 +3,7 @@ In this repository I store the sample code and presentation slides for the talks
 [JaxDug](https://www.meetup.com/Jaxdug/).
 
 ## CQRS and DDD
-this presentation shows how to implement a CQRS system and a couple of frameworks you can use on the .Net platform.  This is the presentaiton I gave at [Code Impact 2017](http://www.codeimpact.org).
+This presentation shows how to implement a CQRS system and a couple of frameworks you can use on the .Net platform.  This is the presentaiton I gave at [Code Impact 2017](http://www.codeimpact.org).  This folder contains the sample code an the slides from my presentation but you can find some additional information and a good description of the sample code's architecture on [My Web Site](http://www.markewer.com/2016/11/14/cqrs-system-design/).
 
 ## Evolution of CQRS+ES
 This presentation attempted to show how the CQRS and ES design patterns are natural evolutionary steps to 
