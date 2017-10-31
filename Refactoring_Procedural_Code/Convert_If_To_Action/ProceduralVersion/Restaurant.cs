@@ -50,13 +50,13 @@ namespace Convert_If_To_Action.ProceduralVersion
         public static decimal RoyaltiesRate { get; } = 0.01m;
 
         // total of all sales
-        public decimal GrossSales { get; set; }
+        public decimal GrossSales { get; private set; }
 
         // Portion of sales for the Franchisee
-        public decimal FranchiseeSales { get; set; }
+        public decimal FranchiseeSales { get; private set; }
 
         // Portion of sales for the Franchise
-        public decimal RoyaltiesDue { get; set; }
+        public decimal RoyaltiesDue { get; private set; }
 
         #endregion Sales
 
@@ -73,7 +73,7 @@ namespace Convert_If_To_Action.ProceduralVersion
             this.IsTerminated = true;
         }
 
-        public void ProcessDailySales(DateTime salesDate, decimal amount)
+        public void ProcessDailySales(decimal amount)
         {
             if(!this.IsOpen)
             {

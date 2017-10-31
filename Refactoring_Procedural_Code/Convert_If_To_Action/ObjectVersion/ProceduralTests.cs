@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Convert_If_To_Action.ProceduralVersion
+namespace Convert_If_To_Action.ObjectVersion
 {
     public class ProceduralTests
     {
