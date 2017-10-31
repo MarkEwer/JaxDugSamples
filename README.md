@@ -2,8 +2,20 @@
 In this repository I store the sample code and presentation slides for the talks I have given at 
 [JaxDug](https://www.meetup.com/Jaxdug/).
 
+## Transitioning Legacy Procedural into Object Oriented Code 
+In this presentation, Mark will walk you through how to convert the kinds of procedural code typically found in a legacy application into modern, object-oriented structures.  Along the way, we'll point out some of the new features of C# 6 and highlight testability, maintainability, and make your code easier to modify in the future.
+
+This presentation was given at the JaxDug meetup on November 9th, 2017.
+
+ 1. The difference between procedural code and object-oriented code
+ 1. Converting boolean conditionals into object branching 
+ 1. Converting procedural iterators into object selectors 
+ 1. Converting procedural algorithms into object strategies
+
+Source code for this is in the [Refactoring Procedural Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/Refactoring_Procedural_Code) folder.
+
 ## CQRS and DDD
-This presentation shows how to implement a CQRS system and a couple of frameworks you can use on the .Net platform.  This is the presentaiton I gave at [Code Impact 2017](http://www.codeimpact.org).  This folder contains the sample code an the slides from my presentation but you can find some additional information and a good description of the sample code's architecture on [My Web Site](http://www.markewer.com/2016/11/14/cqrs-system-design/).
+This presentation shows how to implement a CQRS system and a couple of frameworks you can use on the .Net platform.  This is the presentation I gave at [Code Impact 2017](http://www.codeimpact.org).  This folder contains the sample code an the slides from my presentation but you can find some additional information and a good description of the sample code's architecture on [My Web Site](http://www.markewer.com/2016/11/14/cqrs-system-design/).
 
 ## Evolution of CQRS+ES
 This presentation attempted to show how the CQRS and ES design patterns are natural evolutionary steps to 
