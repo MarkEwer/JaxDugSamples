@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convert_If_To_Action", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convert_Iterator_to_Selector", "Convert_Iterator_to_Selector\Convert_Iterator_to_Selector.csproj", "{F61E71F7-7C25-4E0A-8298-10CD33FA7724}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Convert_Algorithm_to_Strategy", "Convert_Algorithm_to_Strategy\Convert_Algorithm_to_Strategy.csproj", "{68A7FF86-9838-4073-84AC-A38353325802}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F61E71F7-7C25-4E0A-8298-10CD33FA7724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F61E71F7-7C25-4E0A-8298-10CD33FA7724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F61E71F7-7C25-4E0A-8298-10CD33FA7724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A7FF86-9838-4073-84AC-A38353325802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A7FF86-9838-4073-84AC-A38353325802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A7FF86-9838-4073-84AC-A38353325802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A7FF86-9838-4073-84AC-A38353325802}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Convert_Iterator_to_Selector.ObjectVersion
 {
-    public class ProceduralTest
+    public class ObjectTest
     {
         [Fact]
         public void FindMostOrderedSandwich()

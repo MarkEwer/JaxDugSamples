@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Convert_If_To_Action.ObjectVersion
 {
-    public class ProceduralTests
+    public class ObjectTest
     {
         [Fact]
         public void TestRestaurantNotYetOpen()
