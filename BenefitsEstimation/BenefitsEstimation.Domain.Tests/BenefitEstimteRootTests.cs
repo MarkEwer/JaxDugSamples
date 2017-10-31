@@ -198,7 +198,8 @@ namespace Benefits.Domain.Tests
         private void AddEmployee(string id)
         {
             // Act
-            var cmd = new Commands.AddEmployeeToBenefitsEstimate(id, "Mark", "Ewer");
+            var cmd = new Commands.AddEmployeeToBenefitsEstimate(
+                id, "Mark", "Ewer");
             var result = _processor.ProcessCommand(cmd);
 
             // Assert
