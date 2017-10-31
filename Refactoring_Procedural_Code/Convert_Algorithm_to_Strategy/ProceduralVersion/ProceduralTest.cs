@@ -7,7 +7,7 @@ namespace Convert_Algorithm_to_Strategy.ProceduralVersion
     public class ProceduralTest
     {
         [Fact]
-        public void TestTaxCalculations()
+        public void TestEngagementContestWinner()
         {
             var registers = new List<Register>
             {

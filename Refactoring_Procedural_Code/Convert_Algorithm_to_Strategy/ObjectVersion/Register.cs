@@ -7,10 +7,12 @@ namespace Convert_Algorithm_to_Strategy.ObjectVersion
     {
         public string Name { get; private set; }
         private IEnumerable<Sale> _sales;
-        public Register(string name, IEnumerable<Sale> dailySales)
+        private IEngagementStrategy _strategy;
+        public Register(string name, IEnumerable<Sale> dailySales, IEngagementStrategy strategy)
         {
             Name = name;
             _sales = dailySales;
+            _strategy = strategy;
         }
 
         private decimal _customerEngagement = 0m;
@@ -20,16 +22,11 @@ namespace Convert_Algorithm_to_Strategy.ObjectVersion
             {
                 if(_customerEngagement==0m)
                 {
-                    this.CalculateCustomerEngagementForDay();
+                    _customerEngagement = this._strategy.CalculateCustomerEngagementForDay(this._sales);
                 }
                 return _customerEngagement;
             }
         }
-        private void CalculateCustomerEngagementForDay()
-        {
-            _customerEngagement = this._sales
-                .Where(x => x.Donations > 0)
-                .Sum(x => x.Donations);
-        }
+
     }
 }
