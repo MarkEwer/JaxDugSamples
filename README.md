@@ -2,7 +2,7 @@
 In this repository I store the sample code and presentation slides for the talks I have given at 
 [JaxDug](https://www.meetup.com/Jaxdug/).
 
-## Transitioning Legacy Procedural into Object Oriented Code 
+## Transitioning Legacy Procedural into Object Oriented Code (Nov 9th, 2017)
 In this presentation, Mark will walk you through how to convert the kinds of procedural code typically found in a legacy application into modern, object-oriented structures.  Along the way, we'll point out some of the new features of C# 6 and highlight testability, maintainability, and make your code easier to modify in the future.
 
 This presentation was given at the JaxDug meetup on November 9th, 2017.
@@ -12,19 +12,26 @@ This presentation was given at the JaxDug meetup on November 9th, 2017.
  1. Converting procedural iterators into object selectors 
  1. Converting procedural algorithms into object strategies
 
-Source code for this is in the [Refactoring Procedural Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/Refactoring_Procedural_Code) folder.
+ - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/Refactoring_Procedural_Code)
+ - [Slides](https://github.com/MarkEwer/JaxDugSamples/raw/master/Refactoring_Procedural_Code/Refactoring_Procedural_Code.pptx)
+ - [Meetup](https://www.meetup.com/jaxdug/events/244688610/)
 
-## CQRS and DDD
+## CQRS and DDD (Aug 26th, 2017)
 This presentation shows how to implement a CQRS system and a couple of frameworks you can use on the .Net platform.  This is the presentation I gave at [Code Impact 2017](http://www.codeimpact.org).  This folder contains the sample code an the slides from my presentation but you can find some additional information and a good description of the sample code's architecture on [My Web Site](http://www.markewer.com/2016/11/14/cqrs-system-design/).
 
-## Evolution of CQRS+ES
+ - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/BenefitsEstimatio)
+ - [Slides](https://github.com/MarkEwer/JaxDugSamples/raw/master/BenefitsEstimation/CodeImpact_Presentation.pptx)
+ - [Code Impact](http://www.codeimpact.org)
+
+## Evolution of CQRS+ES (June 22nd, 2017)
 This presentation attempted to show how the CQRS and ES design patterns are natural evolutionary steps to 
 when you are growing an application.  Separating the commands from the queries in a system is a way to really
 enhance the overall system performance while Event Sourcing is a response to the complexity of cache item
 invalidation.
 
-You can find the sample code and presentation in the 
-[CQRS ES Sample folder](https://github.com/MarkEwer/JaxDugSamples/tree/master/CQRS_ES_Sample).
+ - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/CQRS_ES_Sample)
+ - [Slides](https://github.com/MarkEwer/JaxDugSamples/raw/master/CQRS_ES_Sample/JaxSig_Evolving_to_CQRS_And_ES.pptx)
+ - [Meetup](https://www.meetup.com/JaxArcSIG/events/238015957/)
 
 ## Overview and Demo of Akka.Net (June 8th, 2017)
 
@@ -38,6 +45,7 @@ depending on the state.  Lastly, he will discuss setting up location transparen
 distributed processing.  If time permits, he will touch on how Akka.net, and actor systems in general, lend 
 themselves to a CQRS and Event Sourcing as a method of data persistence.
 
-You can find the sample code and presentation slides for this in the 
-[Akka_Sample folder](https://github.com/MarkEwer/JaxDugSamples/tree/master/Akka_Sample).
+ - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/Akka_Sample)
+ - [Slides](https://github.com/MarkEwer/JaxDugSamples/raw/master/Akka_Sample/JaxDug_Presentation_Akka_Overview.pptx)
+ - [Meetup](https://www.meetup.com/jaxdug/events/240110328/)
 
