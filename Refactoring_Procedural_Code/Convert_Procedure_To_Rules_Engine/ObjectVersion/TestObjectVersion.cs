@@ -13,6 +13,18 @@ namespace Convert_Procedure_To_Rules_Engine.ObjectVersion
             this._gateway = new Gateway(Credit.GetSampleData());
         }
 
+        [Fact(DisplayName = "Object - InvalidNumber")]
+        public void InvalidNumberTest()
+        {
+            var cardNumber = "42";
+            string token = string.Empty;
+            var sut = new TransactionProcessor(_gateway);
+
+            sut.PerformFullCreditProcess(cardNumber, 500m, out token);
+
+            Assert.Equal(string.Empty, token);
+        }
+
         [Fact(DisplayName = "Object - CreditAvailableTest")]
         public void CreditAvailableTest()
         {

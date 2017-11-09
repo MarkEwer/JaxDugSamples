@@ -13,6 +13,25 @@ namespace Convert_Procedure_To_Rules_Engine.ProceduralVersion
             this._gateway = new Gateway(Credit.GetSampleData());
         }
 
+        [Fact(DisplayName = "Procedural - InvalidNumber")]
+        public void InvalidNumberTest()
+        {
+            var cardNumber = "42";
+            bool failed = false;
+            string token = string.Empty;
+            var sut = new TransactionProcessor(_gateway);
+            try
+            {
+                sut.PerformFullCreditProcess(cardNumber, 500m, out token);
+            }
+            catch(InvalidOperationException)
+            {
+                failed = true;
+            }
+
+            Assert.True(failed);
+        }
+
         [Fact(DisplayName = "Procedural - CreditAvailableTest")]
         public void CreditAvailableTest()
         {
