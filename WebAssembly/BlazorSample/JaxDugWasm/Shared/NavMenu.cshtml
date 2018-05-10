@@ -10,7 +10,6 @@
 <div class=@(collapseNavMenu ? "collapse" : null) onclick=@ToggleNavMenu>
     <ul class="nav flex-column">
         <li class="nav-item px-3">
-            <button onclick=@(() => UriHelper.NavigateTo("/"))>HOME</button>
             <NavLink class="nav-link" href="/" Match=NavLinkMatch.All>
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
