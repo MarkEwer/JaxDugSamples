@@ -11,7 +11,8 @@ namespace Convert_Algorithm_to_Strategy.ProceduralVersion
         }
         public string GetWinner()
         {
-            var winner = this._registers.WithMaximum(x => x.CustomerEngagement);
+            var winner = this._registers
+                .WithMaximum(x => x.CustomerEngagement);
             return winner?.Name;
         }
     }

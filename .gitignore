@@ -5,3 +5,11 @@
 */.vs/
 */packages/
 */TestResults/
+*.dtbcache
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
+*.suo
+**/bin
+**/obj

@@ -73,7 +73,8 @@ namespace Convert_If_To_Action.ObjectVersion
         {
             this.GrossSales += amount;
             this.FranchiseeSales += amount;
-            if (this._clock.GetCurrentDate() >= this.OpeningDate.AddDays(ProbationPeriod))
+            if (this._clock.GetCurrentDate() >= 
+                this.OpeningDate.AddDays(ProbationPeriod))
             {
                 this.ProcessDailySales = Open;
             }
@@ -90,7 +91,8 @@ namespace Convert_If_To_Action.ObjectVersion
         {
             this.GrossSales += amount;
             this.FranchiseeSales += amount;
-            if (this._clock.GetCurrentDate() >= this.TerminationDate.AddDays(ProbationPeriod))
+            if (this._clock.GetCurrentDate() >= 
+                this.TerminationDate.AddDays(ProbationPeriod))
             {
                 this.ProcessDailySales = Closed;
             }

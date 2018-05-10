@@ -85,7 +85,8 @@ namespace Convert_If_To_Action.ProceduralVersion
             {
                 this.GrossSales += amount;
                 this.FranchiseeSales += amount;
-                if(this._clock.GetCurrentDate() >= this.OpeningDate.AddDays(ProbationPeriod))
+                if(this._clock.GetCurrentDate() >= 
+                    this.OpeningDate.AddDays(ProbationPeriod))
                 {
                     this.IsOnProbation = false;
                 }
@@ -95,7 +96,8 @@ namespace Convert_If_To_Action.ProceduralVersion
             {
                 this.GrossSales += amount;
                 this.FranchiseeSales += amount;
-                if (this._clock.GetCurrentDate() >= this.TerminationDate.AddDays(ProbationPeriod))
+                if (this._clock.GetCurrentDate() >= 
+                    this.TerminationDate.AddDays(ProbationPeriod))
                 {
                     this.IsOpen = false;
                 }

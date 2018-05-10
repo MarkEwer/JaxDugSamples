@@ -8,7 +8,8 @@ namespace Convert_Algorithm_to_Strategy.ObjectVersion
         public string Name { get; private set; }
         private IEnumerable<Sale> _sales;
         private IEngagementStrategy _strategy;
-        public Register(string name, IEnumerable<Sale> dailySales, IEngagementStrategy strategy)
+        public Register(string name, IEnumerable<Sale> dailySales,
+            IEngagementStrategy strategy)
         {
             Name = name;
             _sales = dailySales;

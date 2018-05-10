@@ -1,0 +1,57 @@
+﻿@page "/meetups"
+@inject HttpClient Http
+
+<h1>JaxDug Meetups</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (_events == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evt in _events)
+                {
+            <tr>
+                <td>@evt.local_date at @evt.local_time</td>
+                <td>@evt.name</td>
+                <td>@evt.status</td>
+            </tr>
+            <tr>
+                <td colspan="4">@evt.description </td>
+            </tr>
+                }
+        </tbody>
+    </table>
+}
+
+@functions {
+    MeetupEvent[] _events;
+
+    protected override async Task OnInitAsync()
+    {
+        _events = await Http.GetJsonAsync<MeetupEvent[]>("/sample-data/meetups.json");
+    }
+
+    public class MeetupEvent
+    {
+        public MeetupEvent() { }
+        public string id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string local_date { get; set; }
+        public string local_time { get; set; }
+        public string status { get; set; }
+        public string link { get; set; }
+    }
+}
