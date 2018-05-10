@@ -11,6 +11,7 @@ This presentation was given at the JaxDug meetup on November 9th, 2017.
  1. Converting boolean conditionals into object branching 
  1. Converting procedural iterators into object selectors 
  1. Converting procedural algorithms into object strategies
+ 1. Converting procedures to simple task execution pipelines
 
  - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/Refactoring_Procedural_Code)
  - [Slides](https://github.com/MarkEwer/JaxDugSamples/raw/master/Refactoring_Procedural_Code/Refactoring_Procedural_Code.pptx)
