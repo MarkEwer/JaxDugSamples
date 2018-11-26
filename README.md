@@ -20,7 +20,7 @@ This presentation was given at the JaxDug meetup on November 9th, 2017.
 ## CQRS and DDD (Aug 26th, 2017)
 This presentation shows how to implement a CQRS system and a couple of frameworks you can use on the .Net platform.  This is the presentation I gave at [Code Impact 2017](http://www.codeimpact.org).  This folder contains the sample code an the slides from my presentation but you can find some additional information and a good description of the sample code's architecture on [My Web Site](http://www.markewer.com/2016/11/14/cqrs-system-design/).
 
- - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/BenefitsEstimatio)
+ - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/BenefitsEstimation)
  - [Slides](https://github.com/MarkEwer/JaxDugSamples/raw/master/BenefitsEstimation/CodeImpact_Presentation.pptx)
  - [Code Impact](http://www.codeimpact.org)
 
