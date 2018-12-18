@@ -2,6 +2,13 @@
 In this repository I store the sample code and presentation slides for the talks I have given at 
 [JaxDug](https://www.meetup.com/Jaxdug/).
 
+## WebAssembly with OOUI and Blazor
+In this presentation I show an overview of Web Assembly with demos of OOUI and Blazor. The presentation will cover how to use the Mono compiler toolchain to build, deploy, and run .Net assemblies in the web browser. The focus is on the bleeding-edge work being done by several open source projects and will, hopefully, show everyone how and why you may want to invest some time learning about this exciting new technology stack addition.
+
+ - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/WebAssembly)
+ - [Slides](https://github.com/MarkEwer/JaxDugSamples/blob/master/WebAssembly/JaxDug_WebAssembly_20180510.pptx)
+ - [Meetup](https://www.meetup.com/jaxdug/events/gsctdpyxhbnb/)
+
 ## Transitioning Legacy Procedural into Object Oriented Code (Nov 9th, 2017)
 In this presentation, Mark will walk you through how to convert the kinds of procedural code typically found in a legacy application into modern, object-oriented structures.  Along the way, we'll point out some of the new features of C# 6 and highlight testability, maintainability, and make your code easier to modify in the future.
 
