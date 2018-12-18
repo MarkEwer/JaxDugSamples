@@ -2,7 +2,7 @@
 In this repository I store the sample code and presentation slides for the talks I have given at 
 [JaxDug](https://www.meetup.com/Jaxdug/).
 
-## WebAssembly with OOUI and Blazor
+## WebAssembly with OOUI and Blazor (May 10th, 2018)
 In this presentation I show an overview of Web Assembly with demos of OOUI and Blazor. The presentation will cover how to use the Mono compiler toolchain to build, deploy, and run .Net assemblies in the web browser. The focus is on the bleeding-edge work being done by several open source projects and will, hopefully, show everyone how and why you may want to invest some time learning about this exciting new technology stack addition.
 
  - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/WebAssembly)
