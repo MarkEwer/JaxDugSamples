@@ -1,12 +1,8 @@
 ﻿using Akka.Actor;
 using System;
 
-namespace UntyptedActorDemo
-{
-
-
-
-
+namespace UntypedActorDemo
+{ 
     public class DemoActor1 : UntypedActor
     {
         private int _counter = 0;
@@ -21,8 +17,4 @@ namespace UntyptedActorDemo
             else { Console.WriteLine("What?"); }
         }
     }
-
-
-
-
 }
