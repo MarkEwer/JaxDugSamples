@@ -3,7 +3,7 @@ using System;
 
 namespace UntypedActorDemo
 { 
-    public class DemoActor1 : UntypedActor
+    public class PointsTrackingActor : UntypedActor
     {
         private int _counter = 0;
         protected override void OnReceive(object message)

@@ -13,7 +13,7 @@ namespace UntypedActorDemo
         {
             using (var system = ActorSystem.Create("demo-server"))
             {
-                var service1 = system.ActorOf<DemoActor1>(nameof(DemoActor1));
+                var service1 = system.ActorOf<PointsTrackingActor>(nameof(PointsTrackingActor));
 
                 Console.ReadKey();
                 service1.Tell("This is a message");

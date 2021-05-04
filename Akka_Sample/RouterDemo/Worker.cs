@@ -8,14 +8,16 @@ namespace RouterDemo
         public Worker()
         {
             Receive<Echo>(x => EchoMessage(x));
-            //Receive<Echo>(x => EchoMessageWithThreadingError(x));
+            // Receive<Echo>(x => EchoMessageWithThreadingError(x));
         }
+
         private void EchoMessage(Echo x)
         {
             Console.ForegroundColor = x.Color;
             Console.WriteLine($"ACTOR: {Self.Path.Name} - MESSAGE: {x.Message}");
             Console.ResetColor();
         }
+
         private void EchoMessageWithThreadingError(Echo x)
         {
             foreach(char c in $"ACTOR: {Self.Path.Name} - MESSAGE: {x.Message}".ToCharArray())
@@ -28,7 +30,3 @@ namespace RouterDemo
         }
     }
 }
-
-
-
-
