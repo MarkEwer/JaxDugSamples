@@ -59,4 +59,5 @@ themselves to a CQRS and Event Sourcing as a method of data persistence.
 
 ## GIT DEMO
 
-for the Digital Lotus Team because they are the best ever.
+for the Digital Lotus Team because they are super awesome.
+ because they are the best ever.
