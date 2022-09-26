@@ -56,8 +56,3 @@ themselves to a CQRS and Event Sourcing as a method of data persistence.
  - [Sample Code](https://github.com/MarkEwer/JaxDugSamples/tree/master/Akka_Sample)
  - [Slides](https://github.com/MarkEwer/JaxDugSamples/raw/master/Akka_Sample/JaxDug_Presentation_Akka_Overview.pptx)
  - [Meetup](https://www.meetup.com/jaxdug/events/240110328/)
-
-## GIT DEMO
-
-for the Digital Lotus Team because they are super awesome.
- because they are the best ever.
